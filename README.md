@@ -27,7 +27,7 @@ The `setup_project.sh` script automates the initialization of a clean and scalab
 
 ## Technologies
 - **client project**: React.js
-- **server project**: .NET Core 6+ with Web API
+- **server project**: .NET 8 with Web API
 - **architecture**: Clean Architecture
 - **testing**: xUnit
 - **database**: Entity Framework Core (SQLite)
