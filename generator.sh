@@ -19,11 +19,11 @@ echo "Create the server solution"
 dotnet new sln --output server
 
 echo "Create server/src projects"
-dotnet new classlib --name Domain --output server/src/Domain 
-dotnet new classlib --name Application --output server/src/Application
-dotnet new classlib --name Persistence --output server/src/Persistence
+dotnet new classlib --name Domain --output server/src/Domain --framework net8.0
+dotnet new classlib --name Application --output server/src/Application --framework net8.0
+dotnet new classlib --name Persistence --output server/src/Persistence --framework net8.0
 mkdir -p server/src/Infastructure
-dotnet new webapi --name Api --output server/src/Api 
+dotnet new webapi --name Api --output server/src/Api --framework net8.0
 
 echo "Set project references"
 dotnet add server/src/Application reference server/src/Domain
@@ -31,20 +31,20 @@ dotnet add server/src/Persistence reference server/src/Application
 dotnet add server/src/Api reference server/src/Application
 
 echo "Add necessary packages to Application project"
-dotnet add server/src/Application package FluentValidation
-dotnet add server/src/Application package FluentValidation.AspNetCore
-dotnet add server/src/Application package FluentValidation.DependencyInjectionExtensions
+dotnet add server/src/Application package FluentValidation --version 11.11.0
+dotnet add server/src/Application package FluentValidation.AspNetCore --version 11.3.0
+dotnet add server/src/Application package FluentValidation.DependencyInjectionExtensions --version 11.11.0
 
 echo "Add necessary packages to Persistence project"
-dotnet add server/src/Persistence package Bogus
-dotnet add server/src/Persistence package Microsoft.EntityFrameworkCore
-dotnet add server/src/Persistence package Microsoft.EntityFrameworkCore.Sqlite
-dotnet add server/src/Persistence package Microsoft.EntityFrameworkCore.Tools
+dotnet add server/src/Persistence package Bogus --version 35.6.1
+dotnet add server/src/Persistence package Microsoft.EntityFrameworkCore --version 8.0.11
+dotnet add server/src/Persistence package Microsoft.EntityFrameworkCore.Sqlite --version 8.0.11
+dotnet add server/src/Persistence package Microsoft.EntityFrameworkCore.Tools --version 8.0.11
 
 echo "Add necessary packages to Api project"
-dotnet add server/src/Api package Microsoft.AspNetCore.Identity.UI
-dotnet add server/src/Api package Microsoft.EntityFrameworkCore
-dotnet add server/src/Api package Microsoft.EntityFrameworkCore.Design
+dotnet add server/src/Api package Microsoft.AspNetCore.Identity.UI --version 8.0.11
+dotnet add server/src/Api package Microsoft.EntityFrameworkCore --version 8.0.11
+dotnet add server/src/Api package Microsoft.EntityFrameworkCore.Design --version 8.0.11
 
 echo "Create Application sceleton"
 rm -f server/src/Application/Class1.cs
@@ -91,10 +91,10 @@ echo "// ExceptionHandlingMiddleware class" > server/src/Api/Middlewares/Excepti
 echo "// PerformanceMonitoringMiddleware class" > server/src/Api/Middlewares/PerformanceMonitoringMiddleware.cs
 
 echo "Create test projects"
-dotnet new xunit --name Application.Unit.Tests --output server/test/Application.Unit.Tests
-dotnet new xunit --name Domain.Unit.Tests --output server/test/Domain.Unit.Tests
-dotnet new xunit --name Persistence.Unit.Tests --output server/test/Persistence.Unit.Tests
-dotnet new xunit --name Api.Integration.Tests --output server/test/Api.Integration.Tests
+dotnet new xunit --name Application.Unit.Tests --output server/test/Application.Unit.Tests --framework net8.0
+dotnet new xunit --name Domain.Unit.Tests --output server/test/Domain.Unit.Tests --framework net8.0
+dotnet new xunit --name Persistence.Unit.Tests --output server/test/Persistence.Unit.Tests --framework net8.0
+dotnet new xunit --name Api.Integration.Tests --output server/test/Api.Integration.Tests --framework net8.0
 
 echo "Add projects to the solution"
 dotnet sln server/server.sln add server/src/Application

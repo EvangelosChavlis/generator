@@ -76,11 +76,10 @@ The script generates the following project structure:
     - **`Persistence.Unit.Tests/`** - Unit tests for the Persistence layer.
     - **`Api.Integration.Tests/`** - Integration tests for the API layer.
 
-
 ## **Prerequisites**
 Ensure you have the following tools installed:
 - **Node.js** (for `npx` and React setup)
-- **.NET 6+ SDK** (for creating and running the .NET projects)
+- **.NET 8 SDK** (for creating and running the .NET projects)
 - **Bash** (for running the script on Linux/MacOS; for Windows, use Git Bash or WSL)
 
 ## **How to Use**
