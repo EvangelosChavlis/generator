@@ -122,8 +122,9 @@ The script is designed to automate the creation of a full-stack project with a R
 
 ## 5. Set Up Project References
 - Configures references between projects to enforce the **Clean Architecture**:
-  - `Domain` is referenced by `Application`.
-  - `Application` is referenced by `Persistence` and `API`.
+  - `Domain` project is referenced by `Persistence` project.
+  - `Persistence` project is referenced by `Application` project.
+  - `Application` project is referenced by `Api` project.
   
 ## 6. Install Essential NuGet Packages
 - Installs necessary packages for each backend layer:
@@ -131,6 +132,9 @@ The script is designed to automate the creation of a full-stack project with a R
     - `FluentValidation`
     - `FluentValidation.AspNetCore`
     - `FluentValidation.DependencyInjectionExtensions`
+    - `Microsoft.AspNetCore.Authentication.JwtBearer`
+    - `Microsoft.IdentityModel.Tokens`
+    - `System.IdentityModel.Tokens.Jwt `
   - **Persistence Project**:
     - `Bogus` - For generating fake data.
     - `Microsoft.EntityFrameworkCore`

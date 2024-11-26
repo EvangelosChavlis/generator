@@ -26,14 +26,17 @@ mkdir -p server/src/Infastructure
 dotnet new webapi --name Api --output server/src/Api --framework net8.0
 
 echo "Set project references"
-dotnet add server/src/Application reference server/src/Domain
-dotnet add server/src/Persistence reference server/src/Application
+dotnet add server/src/Persistence reference server/src/Domain
+dotnet add server/src/Application reference server/src/Persistence
 dotnet add server/src/Api reference server/src/Application
 
 echo "Add necessary packages to Application project"
 dotnet add server/src/Application package FluentValidation --version 11.11.0
 dotnet add server/src/Application package FluentValidation.AspNetCore --version 11.3.0
 dotnet add server/src/Application package FluentValidation.DependencyInjectionExtensions --version 11.11.0
+dotnet add server/src/Application package Microsoft.AspNetCore.Authentication.JwtBearer --version 8.0.11
+dotnet add server/src/Application package Microsoft.IdentityModel.Tokens --version 8.2.1
+dotnet add server/src/Application package System.IdentityModel.Tokens.Jwt --version 8.2.1
 
 echo "Add necessary packages to Persistence project"
 dotnet add server/src/Persistence package Bogus --version 35.6.1
@@ -68,6 +71,7 @@ echo "// Envelope class" > server/src/Domain/Models/Common/Envelope.cs
 echo "// IncludeThenInclude class" > server/src/Domain/Models/Common/IncludeThenInclude.cs
 echo "// UrlQuery class" > server/src/Domain/Models/Common/UrlQuery.cs
 echo "// CustomException class" > server/src/Domain/Models/Errors/CustomException.cs
+echo "// ErrorDetails class" > server/src/Domain/Models/Errors/ErrorDetails.cs
 echo "// LogErrors class" > server/src/Domain/Models/Errors/LogErrors.cs
 echo "// Telemetry class" > server/src/Domain/Models/Metrics/Telemetry.cs
 
