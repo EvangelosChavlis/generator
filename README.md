@@ -111,7 +111,7 @@ The script is designed to automate the creation of a full-stack project with a R
     - `run-dev.sh` - A shell script for development setup.
 
 ## 3. Set Up React client
-- Uses `create-react-app` to create a **React frontend** in the `client/` directory.
+- Uses `vite` to create a **React client project** in the `client/` directory.
 
 ## 4. Initialize .NET Solution
 - Creates a `.NET solution` called `server` with the following structure:
