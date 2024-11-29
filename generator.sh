@@ -13,7 +13,7 @@ mkdir scripts
 echo "# script..." > scripts/run-dev.sh
 
 echo "Create the client project (React)"
-npx create-react-app client
+npx create-vite@latest client --template react
 
 echo "Create the server solution"
 dotnet new sln --output server
@@ -48,13 +48,16 @@ echo "Add necessary packages to Api project"
 dotnet add server/src/Api package Microsoft.AspNetCore.Identity.UI --version 8.0.11
 dotnet add server/src/Api package Microsoft.EntityFrameworkCore --version 8.0.11
 dotnet add server/src/Api package Microsoft.EntityFrameworkCore.Design --version 8.0.11
+dotnet add server/src/Api package Newtonsoft.Json --version 13.0.3
 
 echo "Create Application sceleton"
 rm -f server/src/Application/Class1.cs
 mkdir  -p server/src/Application/Filters
 mkdir  -p server/src/Application/Helpers
 mkdir  -p server/src/Application/Includes
+mkdir  -p server/src/Application/Interfaces
 mkdir  -p server/src/Application/Mappings
+mkdir  -p server/src/Application/Services
 mkdir  -p server/src/Application/Validators
 dotnet new .gitignore --output server/src/Application
 echo "// DependencyInjection class" >  server/src/Application/DependencyInjection.cs
@@ -99,6 +102,12 @@ dotnet new xunit --name Application.Unit.Tests --output server/test/Application.
 dotnet new xunit --name Domain.Unit.Tests --output server/test/Domain.Unit.Tests --framework net8.0
 dotnet new xunit --name Persistence.Unit.Tests --output server/test/Persistence.Unit.Tests --framework net8.0
 dotnet new xunit --name Api.Integration.Tests --output server/test/Api.Integration.Tests --framework net8.0
+
+echo "Set references for test projects"
+dotnet add server/test/Domain.Unit.Tests reference server/src/Domain
+dotnet add server/test/Application.Unit.Tests reference server/src/Application
+dotnet add server/test/Persistence.Unit.Tests reference server/src/Persistence
+dotnet add server/test/Api.Integration.Tests reference server/src/Api
 
 echo "Add projects to the solution"
 dotnet sln server/server.sln add server/src/Application

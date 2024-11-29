@@ -19,8 +19,8 @@ This repository contains a Bash script that automates the setup of a full-stack 
 - [License](#license)
 
 ## Overview
-The `setup_project.sh` script automates the initialization of a clean and scalable project setup:
-- A **React** frontend using `create-react-app`.
+The `generator.sh` (or `generator.bat`) script automates the initialization of a clean and scalable project setup:
+- A **React** frontend using `vite`.
 - A **.NET Web API** backend following **Clean Architecture** principles.
 - Automatic installation of necessary packages and setting up references.
 - Creation of skeleton files and folders for each layer in the backend.
@@ -84,8 +84,8 @@ Ensure you have the following tools installed:
 
 ## **How to Use**
 1. **Clone the Repository** (or create a new directory for your project).
-2. **Save the Script** as `generator.sh` in the project root.
-3. Make the script executable:
+2. **Save the Script** as `generator.sh` (or `generator.bat`) for  in the project root.
+3. Make the script executable (for MacOs):
    
    ```bash
    chmod +x generator.sh
@@ -118,7 +118,7 @@ The script is designed to automate the creation of a full-stack project with a R
   - **Domain** project: Contains core business entities and logic.
   - **Application** project: Contains use cases and business rules.
   - **Persistence** project: Handles database context and repositories.
-  - **API** project: Acts as the entry point for the application, handling HTTP requests.
+  - **Api** project: Acts as the entry point for the application, handling HTTP requests.
 
 ## 5. Set Up Project References
 - Configures references between projects to enforce the **Clean Architecture**:
@@ -140,17 +140,18 @@ The script is designed to automate the creation of a full-stack project with a R
     - `Microsoft.EntityFrameworkCore`
     - `Microsoft.EntityFrameworkCore.Sqlite`
     - `Microsoft.EntityFrameworkCore.Tools`
-  - **API Project**:
+  - **Api Project**:
     - `Microsoft.AspNetCore.Identity.UI`
     - `Microsoft.EntityFrameworkCore`
     - `Microsoft.EntityFrameworkCore.Design`
+    - `Newtonsoft.Json`
 
 ## 7. Create Skeleton Directories and Files
 - Initializes directories and placeholder files for each backend layer:
   - **Application**: Filters, Helpers, Includes, Mappings, Validators.
   - **Domain**: Dto, Common Models, Error Handling, Metrics.
   - **Persistence**: Configurations, Contexts, Interfaces, Repositories.
-  - **API**: Helpers, Middlewares for exception handling and performance monitoring.
+  - **Api**: Helpers, Middlewares for exception handling and performance monitoring.
 
 ## 8. Set Up Unit Tests
 - Creates test projects for each backend layer using **xUnit**:
@@ -174,7 +175,7 @@ Feel free to modify the script according to your needs:
 - Include additional packages for authentication, logging, or other purposes.
 - Integrate Docker setup commands for containerization.
 
-To make changes, edit the `setup_project.sh` file and rerun the script.
+To make changes, edit the `generator.sh` (or `generator.bat`) file and rerun the script.
 
 # Contributing
 
