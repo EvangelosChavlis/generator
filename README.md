@@ -20,8 +20,8 @@ This repository contains a Bash script that automates the setup of a full-stack 
 
 ## Overview
 The `generator.sh` (or `generator.bat`) script automates the initialization of a clean and scalable project setup:
-- A **React** frontend using `vite`.
-- A **.NET Web API** backend following **Clean Architecture** principles.
+- A **React** client project using `vite`.
+- A **.NET** server project following **Clean Architecture** principles.
 - Automatic installation of necessary packages and setting up references.
 - Creation of skeleton files and folders for each layer in the backend.
 
