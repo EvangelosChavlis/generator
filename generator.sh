@@ -12,8 +12,25 @@ echo "// model...." > docs/model.md
 mkdir scripts
 echo "# script..." > scripts/run-dev.sh
 
-echo "Create the client project (React)"
-npx create-vite@latest client --template react
+shopt -s nocasematch
+
+# Prompt the user for React project type
+echo "Do you want to use TypeScript with React? (yes/no):"
+read use_typescript
+
+# Convert user input to lowercase for case-insensitive comparison
+use_typescript=$(echo "$use_typescript" | tr '[:upper:]' '[:lower:]')
+
+# Check the user's response and create the client project accordingly
+if [[ "$use_typescript" == "yes" || "$use_typescript" == "y" ]]; then
+    echo "Creating React project with TypeScript..."
+    npx create-vite@latest client --template react-ts
+else
+    echo "Creating React project without TypeScript..."
+    npx create-vite@latest client --template react
+fi
+
+shopt -u nocasematch
 
 echo "Create the server solution"
 dotnet new sln --output server

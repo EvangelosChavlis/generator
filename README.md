@@ -20,7 +20,7 @@ This repository contains a Bash script that automates the setup of a full-stack 
 
 ## Overview
 The `generator.sh` (or `generator.bat`) script automates the initialization of a clean and scalable project setup:
-- A **React** client project using `vite`.
+- A **React** client project using `vite` (with typescript use option).
 - A **.NET** server project following **Clean Architecture** principles.
 - Automatic installation of necessary packages and setting up references.
 - Creation of skeleton files and folders for each layer in the backend.
@@ -44,7 +44,7 @@ The script generates the following project structure:
 
 ### Client
 
-- **`client/`** - Contains the React frontend project.
+- **`client/`** - Contains the React client project.
 
 ### Documentation
 
@@ -61,7 +61,7 @@ The script generates the following project structure:
 
 - **`server/`** - Contains the backend code and solution file.
   - **`server.sln`** - The main .NET Solution file.
-  - **`src/`** - Source code for the backend.
+  - **`src/`** - Source code for the server project.
     - **`Application/`** - The Application layer. This contains:
       - Use cases and business logic.
     - **`Domain/`** - The Domain layer. This includes:
