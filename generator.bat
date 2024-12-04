@@ -34,7 +34,7 @@ echo "Create server\src projects"
 dotnet new classlib --name Domain --output server\src\Domain --framework net8.0
 dotnet new classlib --name Application --output server\src\Application --framework net8.0
 dotnet new classlib --name Persistence --output server\src\Persistence --framework net8.0
-mkdir server\src\Infastructure
+mkdir server\src\Infrastructure
 dotnet new webapi --name Api --output server\src\Api --framework net8.0
 
 echo "Set project references"
