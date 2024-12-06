@@ -13,19 +13,26 @@ echo // model.... > docs\model.md
 mkdir scripts
 echo # script... > scripts\run-dev.bat
 
-echo "Do you want to use TypeScript with React? (yes/no):"
-set /p use_typescript=
-
 if /i "%use_typescript%"=="yes" (
     echo Creating React project with TypeScript...
-    npx create-vite@latest client --template react-ts
-) else if /i "%use_typescript%"=="y" (
-    echo Creating React project with TypeScript...
-    npx create-vite@latest client --template react-ts
+    call npx create-vite@latest client --template react-ts --no-interactive
+    if errorlevel 1 (
+        echo "Failed to create React project with TypeScript. Check the error logs."
+        goto :end
+    )
 ) else (
     echo Creating React project without TypeScript...
-    npx create-vite@latest client --template react
+    call npx create-vite@latest client --template react --no-interactive
+    if errorlevel 1 (
+        echo "Failed to create React project without TypeScript. Check the error logs."
+        goto :end
+    )
 )
+
+echo "React project created successfully. Continuing setup..."
+
+:end
+echo "Script execution complete."
 
 echo "Create the server solution"
 dotnet new sln --output server
