@@ -13,6 +13,9 @@ echo // model.... > docs\model.md
 mkdir scripts
 echo # script... > scripts\run-dev.bat
 
+echo "Do you want to use TypeScript with React? (yes/no):"
+set /p use_typescript=
+
 if /i "%use_typescript%"=="yes" (
     echo Creating React project with TypeScript...
     call npx create-vite@latest client --template react-ts --no-interactive
