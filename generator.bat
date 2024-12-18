@@ -35,7 +35,17 @@ if /i "%use_typescript%"=="yes" (
 echo "React project created successfully. Continuing setup..."
 
 :end
-echo "Script execution complete."
+
+cd client
+
+echo "Add packages to client"
+npm i react-router-dom
+npm i react-toastify
+npm i bootstrap bootstrap-icons react-bootstrap
+npm i --save-dev @types/node
+npm i react-query
+npm i yup @hookform/resolvers
+cd ..
 
 echo "Create the server solution"
 dotnet new sln --output server
@@ -71,6 +81,8 @@ dotnet add server\src\Api package Microsoft.AspNetCore.Identity.UI --version 8.0
 dotnet add server\src\Api package Microsoft.EntityFrameworkCore --version 8.0.11
 dotnet add server\src\Api package Microsoft.EntityFrameworkCore.Design --version 8.0.11
 dotnet add server\src\Api package Newtonsoft.Json --version 13.0.3
+dotnet add server/src/Api package AspNetCoreRateLimit --version 5.0.0
+dotnet add server/src/Api package Swashbuckle.AspNetCore.Annotations --version 7.2.0
 
 echo "Create Application skeleton"
 del /q server\src\Application\Class1.cs
@@ -115,9 +127,11 @@ echo // CommonRepository class > server\src\Persistence\Repositories\CommonRepos
 echo "Create Api skeleton"
 mkdir server\src\Api\Helpers
 mkdir server\src\Api\Middlewares
+mkdir server/src/Api/Extensions
 dotnet new gitignore --output server\src\Api
 echo // ExceptionHandlingMiddleware class > server\src\Api\Middlewares\ExceptionHandlingMiddleware.cs
 echo // PerformanceMonitoringMiddleware class > server\src\Api\Middlewares\PerformanceMonitoringMiddleware.cs
+echo // SwaggerExtensions class > server/src/Api/Extensions/SwaggerExtensions.cs
 
 echo "Create test projects"
 dotnet new xunit --name Application.Unit.Tests --output server\test\Application.Unit.Tests --framework net8.0
@@ -130,6 +144,38 @@ dotnet add server\test\Domain.Unit.Tests reference server\src\Domain
 dotnet add server\test\Application.Unit.Tests reference server\src\Application
 dotnet add server\test\Persistence.Unit.Tests reference server\src\Persistence
 dotnet add server\test\Api.Integration.Tests reference server\src\Api
+
+echo "Add necessary packages to Api.Integration.Tests project"
+dotnet add server/test/Api.Integration.Tests package Microsoft.EntityFrameworkCore.InMemory --version 8.0.11
+
+echo "Create Application.Unit.Tests sceleton"
+del /q server/test/Application.Unit.Tests/UnitTest1.cs
+mkdir server/test/Application.Unit.Tests/Filters
+mkdir server/test/Application.Unit.Tests/Includes
+mkdir server/test/Application.Unit.Tests/Mappings
+mkdir server/test/Application.Unit.Tests/Services
+mkdir server/test/Application.Unit.Tests/TestHelpers
+dotnet new .gitignore --output server/test/Application.Unit.Tests
+
+echo "Create Domain.Unit.Tests sceleton"
+del /q server/test/Domain.Unit.Tests/UnitTest1.cs
+mkdir server/test/Domain.Unit.Tests/Dto
+mkdir server/test/Domain.Unit.Tests/Extensions
+mkdir server/test/Domain.Unit.Tests/Models
+dotnet new .gitignore --output server/test/Domain.Unit.Tests
+
+echo "Create Persistence.Unit.Tests sceleton"
+del /q server/test/Persistence.Unit.Tests/UnitTest1.cs
+mkdir server/test/Persistence.Unit.Tests/Configurations
+mkdir server/test/Persistence.Unit.Tests/Contexts
+mkdir server/test/Persistence.Unit.Tests/Extensions
+mkdir server/test/Persistence.Unit.Tests/Repositories
+dotnet new .gitignore --output server/test/Persistence.Unit.Tests
+
+echo "Create Api.Integration.Tests sceleton"
+del /q server/test/Api.Integration.Tests/UnitTest1.cs
+mkdir server/test/Api.Integration.Tests/Controllers
+dotnet new .gitignore --output server/test/Api.Integration.Tests
 
 echo "Add projects to the solution"
 dotnet sln server\server.sln add server\src\Application
